@@ -1,6 +1,6 @@
 # dnse-morphe
 
-Python library for DNSE (Dragon Securities) trading API with full sync and async support.
+Python library for DNES LightSpeed API V2 trading API with full sync and async support.
 
 ## Features
 
