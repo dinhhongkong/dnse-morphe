@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "DNSE", email = "support@dnse.com.vn"}
+    {name = "Đinh Hồng Kông"}
 ]
 keywords = ["dnse", "trading", "api", "websocket", "stock", "vietnam"]
 classifiers = [
