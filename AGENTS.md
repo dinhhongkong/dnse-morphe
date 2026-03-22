@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-`dnse-morphe` is a Python library for DNSE (Dragon Securities) trading API, providing both REST and WebSocket interfaces for Vietnam Stock Exchange trading. The library should follow the **OpenAI Python SDK pattern** with full sync and async support.
+`dnse-morphe` is a Python library for DNES LightSpeed API V2, providing both REST and WebSocket interfaces for Vietnam Stock Exchange trading. The library should follow the **OpenAI Python SDK pattern** with full sync and async support.
 
 - **Python**: `>=3.12`
 - **Package Manager**: `uv`
@@ -112,14 +112,14 @@ class Trade:
 
 ### Naming Conventions
 
-| Element | Convention | Example |
-|---|---|---|
-| Classes | PascalCase | `DNSEClient`, `TradingClient` |
-| Methods/functions | snake_case | `get_accounts`, `subscribe_trades` |
-| Constants | SCREAMING_SNAKE | `SENSITIVE_HEADERS`, `DEFAULT_TIMEOUT` |
-| Private modules | `_` prefix | `_logs.py`, `_model.py` |
-| Private members | `_` prefix | `self._api_key`, `self._session_id` |
-| Type aliases | PascalCase | `AccountList = list[Account]` |
+| Element           | Convention      | Example                                |
+| ----------------- | --------------- | -------------------------------------- |
+| Classes           | PascalCase      | `DNSEClient`, `TradingClient`          |
+| Methods/functions | snake_case      | `get_accounts`, `subscribe_trades`     |
+| Constants         | SCREAMING_SNAKE | `SENSITIVE_HEADERS`, `DEFAULT_TIMEOUT` |
+| Private modules   | `_` prefix      | `_logs.py`, `_model.py`                |
+| Private members   | `_` prefix      | `self._api_key`, `self._session_id`    |
+| Type aliases      | PascalCase      | `AccountList = list[Account]`          |
 
 ### Models (Pydantic / dataclasses)
 
@@ -138,6 +138,7 @@ _client.py        → Sync wrapper using to_thread (from _utils/_sync.py)
 ```
 
 Key patterns from the existing SDK:
+
 - Client `__init__` stores config; `connect()` / `disconnect()` for WebSocket.
 - HTTP methods return `(status_code, response_body_text)` tuples or parsed objects.
 - `dry_run` parameter on methods for debugging without API calls.
