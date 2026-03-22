@@ -32,13 +32,13 @@ jobs:
         run: uv sync --dev
 
       - name: Lint with ruff
-        run: ruff check src/
+        run: uv run ruff check src/
 
       - name: Check formatting
-        run: ruff format --check src/
+        run: uv run ruff format --check src/
 
       - name: Type check with mypy
-        run: mypy src/dnse_morphe/
+        run: uv run mypy src/dnse_morphe/
 
   test:
     name: Test
@@ -63,7 +63,7 @@ jobs:
         run: uv sync --dev
 
       - name: Run tests
-        run: pytest tests/ -v
+        run: uv run pytest tests/ -v
         env:
           DNSE_MORPHE_LOG: info
 
