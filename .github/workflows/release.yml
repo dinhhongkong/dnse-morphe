@@ -28,17 +28,20 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Create virtual environment
+        run: uv venv .venv
+
       - name: Install dependencies
-        run: uv sync --dev
+        run: uv pip install --python .venv --dev -e .
 
       - name: Lint with ruff
-        run: uv run --project . ruff check src/
+        run: .venv/bin/ruff check src/
 
       - name: Check formatting
-        run: uv run --project . ruff format --check src/
+        run: .venv/bin/ruff format --check src/
 
       - name: Type check with mypy
-        run: uv run --project . mypy src/dnse_morphe/
+        run: .venv/bin/mypy src/dnse_morphe/
 
   test:
     name: Test
@@ -59,11 +62,14 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Create virtual environment
+        run: uv venv .venv
+
       - name: Install dependencies
-        run: uv sync --dev
+        run: uv pip install --python .venv --dev -e .
 
       - name: Run tests
-        run: uv run --project . pytest tests/ -v
+        run: .venv/bin/pytest tests/ -v
         env:
           DNSE_MORPHE_LOG: info
 
