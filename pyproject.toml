@@ -1,6 +1,6 @@
 [project]
 name = "dnse-morphe"
-dynamic = ["version"]
+version = "0.1.0"
 description = "DNSE trading API library with REST and WebSocket support"
 requires-python = ">=3.12"
 readme = "README.md"
@@ -46,17 +46,6 @@ Repository = "https://github.com/dinhhongkong/dnse-morphe"
 Issues = "https://github.com/dinhhongkong/dnse-morphe/issues"
 Changelog = "https://github.com/dinhhongkong/dnse-morphe/releases"
 
-[build-system]
-requires = ["setuptools>=61.0", "setuptools-scm>=8"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools-scm]
-version_file = "src/dnse_morphe/_version.py"
-local_scheme = "no-local-version"
-fallback_version = "0.0.0"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
