@@ -35,17 +35,18 @@ jobs:
         run: uv pip install --python .venv --dev -e .
 
       - name: Lint with ruff
-        run: .venv/bin/ruff check src/
+        run: uv run ruff check src/
 
       - name: Check formatting
-        run: .venv/bin/ruff format --check src/
+        run: uv run ruff format --check src/
 
       - name: Type check with mypy
-        run: .venv/bin/mypy src/dnse_morphe/
+        run: uv run mypy src/
 
   test:
     name: Test
     runs-on: ubuntu-latest
+    if: false  # No tests directory yet
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -69,13 +70,13 @@ jobs:
         run: uv pip install --python .venv --dev -e .
 
       - name: Run tests
-        run: .venv/bin/pytest tests/ -v
+        run: uv run pytest tests/ -v
         env:
           DNSE_MORPHE_LOG: info
 
   build:
     name: Build Package
-    needs: [quality, test]
+    needs: [quality]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
