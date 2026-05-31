@@ -32,7 +32,7 @@ jobs:
         run: uv venv .venv
 
       - name: Install dependencies
-        run: uv pip install --python .venv --group dev -e .
+        run: uv pip install --python .venv -e ".[dev]"
 
       - name: Lint with ruff
         run: uv run ruff check src/
@@ -67,7 +67,7 @@ jobs:
         run: uv venv .venv
 
       - name: Install dependencies
-        run: uv pip install --python .venv --group dev -e .
+        run: uv pip install --python .venv -e ".[dev]"
 
       - name: Run tests
         run: uv run pytest tests/ -v
