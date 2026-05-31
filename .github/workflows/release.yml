@@ -94,8 +94,11 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Create virtual environment
+        run: uv venv .venv
+
       - name: Install build
-        run: uv pip install build
+        run: uv pip install --python .venv build
 
       - name: Build package
         run: python -m build
