@@ -52,14 +52,14 @@ class Trade(BaseModel):
             "board_id": int(data.get("board_id") or data.get("bi") or 0),
             "isin": str(data.get("isin") or data.get("is") or ""),
             "symbol": str(data.get("symbol") or data.get("s") or ""),
-            "price": float(data.get("price") or data.get("p") or 0.0),
-            "quantity": int(data.get("quantity") or data.get("q") or 0),
-            "total_volume_traded": int(data.get("total_volume_traded") or data.get("tvt") or 0),
-            "gross_trade_amount": float(data.get("gross_trade_amount") or data.get("gta") or 0.0),
-            "highest_price": float(data.get("highest_price") or data.get("hp") or 0.0),
-            "lowest_price": float(data.get("lowest_price") or data.get("lp") or 0.0),
-            "open_price": float(data.get("open_price") or data.get("op") or 0.0),
-            "trading_session_id": int(data.get("trading_session_id") or data.get("tsi") or 0),
+            "price": float(data.get("matchPrice") or data.get("price") or data.get("p") or 0.0),
+            "quantity": int(data.get("matchQtty") or data.get("quantity") or data.get("q") or 0),
+            "total_volume_traded": int(data.get("totalVolumeTraded") or data.get("tvt") or 0),
+            "gross_trade_amount": float(data.get("grossTradeAmount") or data.get("gta") or 0.0),
+            "highest_price": float(data.get("highestPrice") or data.get("hp") or 0.0),
+            "lowest_price": float(data.get("lowestPrice") or data.get("lp") or 0.0),
+            "open_price": float(data.get("openPrice") or data.get("op") or 0.0),
+            "trading_session_id": int(data.get("tradingSessionId") or data.get("tsi") or 0),
         }
         return cls.model_validate(raw)
 

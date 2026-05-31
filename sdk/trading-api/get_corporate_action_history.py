@@ -2,10 +2,8 @@
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
-from sdk.dnse import DNSEClient
-
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+from dnse import DNSEClient
 
 def main():
     client = DNSEClient(
@@ -14,9 +12,13 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_deals(
+    status, body = client.get_corporate_action_history(
         account_no="0001000115",
-        market_type="DERIVATIVE",
+        symbol="SSI",
+        ca_type="all",
+        ca_status="pending",
+        page_index=0,
+        page_size=20,
         dry_run=False,
     )
     print(status, body)

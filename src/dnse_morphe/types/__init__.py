@@ -13,6 +13,8 @@ from dnse_morphe.types._order import OrderRequest as OrderRequest
 from dnse_morphe.types._order import OrderResponse as OrderResponse
 from dnse_morphe.types._websocket import WSAccountUpdate as WSAccountUpdate
 from dnse_morphe.types._websocket import WSExpectedPrice as WSExpectedPrice
+from dnse_morphe.types._websocket import WSForeignInvestor as WSForeignInvestor
+from dnse_morphe.types._websocket import WSMarketIndex as WSMarketIndex
 from dnse_morphe.types._websocket import WSOrder as WSOrder
 from dnse_morphe.types._websocket import WSPosition as WSPosition
 from dnse_morphe.types._websocket import WSTradeExtra as WSTradeExtra
@@ -33,6 +35,8 @@ __all__ = [
     "Trade",
     "WSAccountUpdate",
     "WSExpectedPrice",
+    "WSForeignInvestor",
+    "WSMarketIndex",
     "WSOrder",
     "WSPosition",
     "WSTradeExtra",

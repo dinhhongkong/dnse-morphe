@@ -6,11 +6,16 @@ Demonstrates:
 
 This example shows how to receive real-time market data for multiple symbols.
 """
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import asyncio
+from datetime import datetime
 
-from trading_websocket import TradingClient
-from trading_websocket.models import SecurityDefinition
+from dnse import TradingClient
+from dnse.websocket.models import SecurityDefinition
 
 
 async def main():
@@ -24,7 +29,8 @@ async def main():
     )
 
     def handle_security_definition(sec_def: SecurityDefinition):
-        print(f"SECURITY DEFINITION: {sec_def}")
+        received_at = datetime.fromtimestamp(sec_def.receivedAt).strftime("%H:%M:%S.%f")[:-3] if sec_def.receivedAt else "N/A"
+        print(f"[{received_at}] SECURITY DEFINITION: {sec_def}")
 
     # Connect to gateway
     print("Connecting to WebSocket gateway...")
@@ -32,7 +38,7 @@ async def main():
     print(f"Connected! Session ID: {client._session_id}\n")
 
     print("Subscribing to security definition for SSI and 41I1G2000...")
-    await client.subscribe_sec_def(["SSI", "41I1G2000"], on_sec_def=handle_security_definition, encoding=encoding)
+    await client.subscribe_sec_def(["SSI", "41I1G2000"], on_sec_def=handle_security_definition, encoding=encoding, board_id="G1")
 
     print("\nReceiving market data (will run for 1 hour)...\n")
 

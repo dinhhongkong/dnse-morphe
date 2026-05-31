@@ -26,6 +26,8 @@ from dnse_morphe.types import (
     Trade,
     WSAccountUpdate,
     WSExpectedPrice,
+    WSForeignInvestor,
+    WSMarketIndex,
     WSOrder,
     WSPosition,
     WSTradeExtra,
@@ -215,6 +217,10 @@ class WebSocket:
             self._emit("position", WSPosition.from_dict(data))
         elif msg_type == "a":
             self._emit("account", WSAccountUpdate.from_dict(data))
+        elif msg_type == "fi":
+            self._emit("foreign_investor", WSForeignInvestor.from_dict(data))
+        elif msg_type == "mi":
+            self._emit("market_index", WSMarketIndex.from_dict(data))
 
     async def _message_handler(self) -> None:
         reconnect_attempt = 0
@@ -334,6 +340,66 @@ class WebSocket:
         await self._subscribe_channel("account", [])
         if on_account:
             self.on("account", on_account)
+
+    async def subscribe_sec_def(
+        self,
+        symbols: list[str],
+        on_sec_def: Callable[[SecurityDefinition], None] | None = None,
+    ) -> None:
+        channel = f"sec_def.G1.{self.encoding}"
+        await self._subscribe_channel(channel, symbols)
+        if on_sec_def:
+            self.on("security_definition", on_sec_def)
+
+    async def subscribe_expected_price(
+        self,
+        symbols: list[str],
+        on_expected_price: Callable[[WSExpectedPrice], None] | None = None,
+    ) -> None:
+        channel = f"expected_price.G1.{self.encoding}"
+        await self._subscribe_channel(channel, symbols)
+        if on_expected_price:
+            self.on("expected_price", on_expected_price)
+
+    async def subscribe_market_index(
+        self,
+        on_market_index: Callable[[WSMarketIndex], None] | None = None,
+        market_index: str = "HNX",
+    ) -> None:
+        channel = f"index.{market_index}.{self.encoding}"
+        await self._subscribe_channel(channel, [])
+        if on_market_index:
+            self.on("market_index", on_market_index)
+
+    async def subscribe_foreign_trading(
+        self,
+        symbols: list[str],
+        on_foreign_trading: Callable[[WSForeignInvestor], None] | None = None,
+    ) -> None:
+        channel = f"foreign.{self.encoding}"
+        await self._subscribe_channel(channel, symbols)
+        if on_foreign_trading:
+            self.on("foreign_investor", on_foreign_trading)
+
+    async def subscribe_order_event(
+        self,
+        on_order_event: Callable[[WSOrder], None] | None = None,
+        market_type: str = "STOCK",
+    ) -> None:
+        channel = f"order_event.{market_type}.{self.encoding}"
+        await self._subscribe_channel(channel, [])
+        if on_order_event:
+            self.on("order", on_order_event)
+
+    async def subscribe_position_event(
+        self,
+        on_position_event: Callable[[WSPosition], None] | None = None,
+        market_type: str = "STOCK",
+    ) -> None:
+        channel = f"position_event.{market_type}.{self.encoding}"
+        await self._subscribe_channel(channel, [])
+        if on_position_event:
+            self.on("position", on_position_event)
 
     async def _subscribe_channel(self, channel: str, symbols: list[str], **kwargs: Any) -> None:
         if not self._is_authenticated:

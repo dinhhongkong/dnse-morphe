@@ -14,7 +14,16 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_accounts(dry_run=False)
+    status, body = client.get_ohlc(
+        bar_type="STOCK",
+        query={
+            "symbol": "HPG",
+            "resolution": "1",
+            "from": 1735689600,
+            "to": 1735776000,
+        },
+        dry_run=False,
+    )
     print(status, body)
 
 

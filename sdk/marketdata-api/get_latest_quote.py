@@ -14,7 +14,7 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_accounts(dry_run=False)
+    status, body = client.get_latest_quote(symbol="GAS", board_id="G1", dry_run=False)
     print(status, body)
 
 

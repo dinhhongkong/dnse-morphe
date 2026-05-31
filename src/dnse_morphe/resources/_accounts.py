@@ -103,3 +103,17 @@ class Accounts:
         if dry_run:
             return {}
         return json.loads(body)  # type: ignore[arg-type, no-any-return]
+
+    def get_list_care_by(
+        self,
+        *,
+        dry_run: bool = False,
+    ) -> dict[str, Any]:
+        _, body = self._client._request(
+            "GET",
+            "/brokers/accounts/care-by",
+            dry_run=dry_run,
+        )
+        if dry_run:
+            return {}
+        return json.loads(body)  # type: ignore[arg-type, no-any-return]

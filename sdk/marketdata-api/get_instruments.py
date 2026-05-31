@@ -14,7 +14,7 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_accounts(dry_run=False)
+    status, body = client.get_instruments(symbol="SSI,SHS,ACB,AAA,VGI", market_id="", security_group_id="", index_name="", limit=100, page=1, dry_run=False)
     print(status, body)
 
 

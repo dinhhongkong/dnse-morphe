@@ -2,9 +2,9 @@
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from sdk.dnse import DNSEClient
+from dnse import DNSEClient
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
     payload = {
         "accountNo": "0001000115",
         "symbol": "HPG",
-        "side": "BUY",
+        "side": "NB",
         "orderType": "LO",
         "price": 25950,
         "quantity": 100,

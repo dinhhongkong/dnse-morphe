@@ -14,7 +14,11 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_accounts(dry_run=False)
+    status, body = client.get_position_by_id(
+        position_id="replace-with-position-id",
+        market_type="STOCK",
+        dry_run=False,
+    )
     print(status, body)
 
 

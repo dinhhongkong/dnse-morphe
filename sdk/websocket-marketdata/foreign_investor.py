@@ -1,10 +1,8 @@
 """
-Market data subscription example.
-
 Demonstrates:
-- Subscribing to expected price updates
+- Subscribing to foreigner trading
 
-This example shows how to receive real-time market data for multiple symbols.
+This example shows how to receive real-time foreigner trading data
 """
 import os
 import sys
@@ -15,12 +13,12 @@ import asyncio
 from datetime import datetime
 
 from dnse import TradingClient
-from dnse.websocket.models import ExpectedPrice
+from dnse.websocket.models import ForeignInvestor
 
 
 async def main():
     # Initialize client
-    encoding = "msgpack"  # json or msgpack
+    encoding = "json"  # json or msgpack
     client = TradingClient(
         api_key="api-key",
         api_secret="api-secret",
@@ -28,22 +26,22 @@ async def main():
         encoding=encoding,
     )
 
-    def handle_expected_price(expected_price: ExpectedPrice):
-        received_at = datetime.fromtimestamp(expected_price.receivedAt).strftime("%H:%M:%S.%f")[:-3] if expected_price.receivedAt else "N/A"
-        print(f"[{received_at}] EXPECTED PRICE: {expected_price}")
+    def handle_foreign_trading(data: ForeignInvestor):
+        received_at = datetime.fromtimestamp(data.receivedAt).strftime("%H:%M:%S.%f")[:-3] if data.receivedAt else "N/A"
+        print(f"[{received_at}] Foreign trading: {data}")
 
     # Connect to gateway
     print("Connecting to WebSocket gateway...")
     await client.connect()
     print(f"Connected! Session ID: {client._session_id}\n")
 
-    print("Subscribing to expected price for SSI and 41I1G4000...")
-    await client.subscribe_expected_price(["SSI", "41I1G4000"],
-                                          on_expected_price=handle_expected_price, encoding=encoding, board_id="G1")
+    print("Subscribing to foreigner trading...")
+    await client.subscribe_foreign_trading(["HPG", "FPT"], board_id="G1", on_trade=handle_foreign_trading,
+                                           encoding=encoding)
 
-    print("\nReceiving market data (will run for 1 hour)...\n")
+    print("\nReceiving foreigner trading data (will run for 8 hour)...\n")
 
-    # Run for 1H to collect data
+    # Run for 8H to collect data
     # In a real application, you might run indefinitely or until a specific condition
     await asyncio.sleep(60 * 60 * 8)
 

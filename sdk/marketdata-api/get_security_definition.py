@@ -14,7 +14,7 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_accounts(dry_run=False)
+    status, body = client.get_security_definition(symbol="HPG", board_id=None, dry_run=False)
     print(status, body)
 
 
