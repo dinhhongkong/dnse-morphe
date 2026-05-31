@@ -40,11 +40,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/anomalyco/dnse-morphe"
-Documentation = "https://github.com/anomalyco/dnse-morphe#readme"
-Repository = "https://github.com/anomalyco/dnse-morphe"
-Issues = "https://github.com/anomalyco/dnse-morphe/issues"
-Changelog = "https://github.com/anomalyco/dnse-morphe/releases"
+Homepage = "https://github.com/dinhhongkong/dnse-morphe"
+Documentation = "https://github.com/dinhhongkong/dnse-morphe#readme"
+Repository = "https://github.com/dinhhongkong/dnse-morphe"
+Issues = "https://github.com/dinhhongkong/dnse-morphe/issues"
+Changelog = "https://github.com/dinhhongkong/dnse-morphe/releases"
 
 [build-system]
 requires = ["setuptools>=61.0", "setuptools-scm>=8"]
