@@ -1,15 +1,10 @@
 from __future__ import annotations
 
 import logging
-from collections.abc import Callable
-from typing import TYPE_CHECKING
 
 from dnse_morphe._base_client import BaseDNSEClient
 from dnse_morphe._constants import WS_BASE_URL_PROD
 from dnse_morphe.resources import WebSocket
-
-if TYPE_CHECKING:
-    from dnse_morphe.types import Quote, Trade
 
 logger = logging.getLogger("dnse-morphe")
 
@@ -36,23 +31,3 @@ class AsyncDNSEClient(BaseDNSEClient):
             timeout=timeout,
         )
         return self.ws
-
-    async def subscribe_trades(
-        self,
-        symbols: list[str],
-        on_trade: Callable[[Trade], None] | None = None,
-        encoding: str = "json",
-    ) -> None:
-        if not self.ws:
-            self.ws = self.websocket(encoding=encoding)
-        await self.ws.subscribe_trades(symbols, on_trade=on_trade)
-
-    async def subscribe_quotes(
-        self,
-        symbols: list[str],
-        on_quote: Callable[[Quote], None] | None = None,
-        encoding: str = "json",
-    ) -> None:
-        if not self.ws:
-            self.ws = self.websocket(encoding=encoding)
-        await self.ws.subscribe_quotes(symbols, on_quote=on_quote)

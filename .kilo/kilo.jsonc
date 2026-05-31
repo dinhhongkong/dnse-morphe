@@ -1,0 +1,23 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "provider": {
+    "openrouter": {
+      "models": {
+        "deepseek/deepseek-v4-pro": {
+          "options": {
+            "provider": {
+              "only": ["deepseek"] 
+            }
+          }
+        },
+        "minimax/minimax-m2.7": {
+          "options": {
+            "provider": {
+              "only": ["minimax/fp8"] 
+            }
+          }
+        }
+      }
+    }
+  }
+}
