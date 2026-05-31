@@ -28,14 +28,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Install build
-        run: pip install build
-
-      - name: Create virtual environment
-        run: uv venv .venv
-
       - name: Install dependencies
-        run: uv pip install --python .venv -e ".[dev]"
+        run: uv sync --extra dev
 
       - name: Lint with ruff
         run: uv run ruff check src/
@@ -66,11 +60,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Create virtual environment
-        run: uv venv .venv
-
       - name: Install dependencies
-        run: uv pip install --python .venv -e ".[dev]"
+        run: uv sync --extra dev
 
       - name: Run tests
         run: uv run pytest tests/ -v
@@ -97,14 +88,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Create virtual environment
-        run: uv venv .venv
-
-      - name: Install build
-        run: uv pip install --python .venv build
-
       - name: Build package
-        run: python -m build
+        run: uv build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
